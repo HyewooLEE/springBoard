@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="list" resultType="spring.controller.ListDTO" parameterType="map">
+			SELECT R, NO, SUBJECT, WRITER, CONTENTS, WRITEDATE FROM (SELECT ROWNUM R, NO, SUBJECT, WRITER, CONTENTS, WRITEDATE FROM BOARDEX ORDER BY NO ASC) WHERE R BETWEEN #{startPage} AND #{endPage} ORDER BY R DESC 
+	</select>
+	<insert id="insert" parameterType="spring.controller.WriteDTO">
+		INSERT INTO BOARDEX VALUES (NO_SEQ.NEXTVAL, #{subject}, #{writer}, #{contents}, #{writeDate}, #{fileName}, #{filePath})
+	</insert>
+	<select id="update" parameterType="spring.controller.WriteDTO" resultType="int">
+		UPDATE BOARDEX SET SUBJECT = #{subject}, WRITER = #{writer}, CONTENTS = #{contents}, WRITEDATE = #{writeDate} WHERE NO = #{no}
+	</select>
+	<select id="delete" parameterType="int" resultType="int">
+		DELETE FROM BOARDEX WHERE NO = #{no}
+	</select>
+	<select id="select" parameterType="int" resultType="spring.controller.WriteDTO">
+		SELECT * FROM BOARDEX WHERE NO = #{no}
+	</select>
+	<select id="count" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM BOARDEX
+	</select>
+</mapper>

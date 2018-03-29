@@ -5,7 +5,7 @@
 <title>목록</title>
 </head>
 <body>
-	test다 적용되냐
+	test다 적용되냐vfgjvjhvgjhvgbhv
 	<form action="writeAction.do" method="POST" align="center" enctype="multipart/form-data">
 	<c:if test="${select.no != null}">
 	<input type="hidden" name="no" value="${select.no}">
